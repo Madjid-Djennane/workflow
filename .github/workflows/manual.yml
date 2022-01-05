@@ -15,7 +15,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git fetch --unshallow
+        git fetch -p
         git checkout dev
         git pull
         git merge --no-ff main -m "Auto-merge main back to dev"
