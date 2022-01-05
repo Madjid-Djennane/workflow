@@ -1,5 +1,6 @@
 # workflow
 github actions tests
 
-test bump tag version : good
-test bump patch
+test bump minor tag version : good
+
+test bump patch tag version : good
