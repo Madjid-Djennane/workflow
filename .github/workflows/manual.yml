@@ -11,11 +11,14 @@ jobs:
       with:
         fetch-depth: '0'
 
-    - name: Merge main back to dev
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Set Git config
       run: |
-        git fetch -p
+          git config --local user.email "madjid.djennane@outlook.fr"
+          git config --local user.name "Madjid-Djennane"
+
+    - name: Merge main back to dev
+      run: |
+        git fetch --unshallow
         git checkout dev
         git pull
         git merge --no-ff main -m "Auto-merge main back to dev"
