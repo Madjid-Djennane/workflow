@@ -7,12 +7,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Send greeting
-      run: echo "Hello world"
-
     - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
+
+    - name: Set Git config
+      run: |
+          git config --local user.email "madjid.djennane@outlook.fr"
+          git config --local user.name "Madjid-Djennane"
+
+    - name: Merge main back to dev
+      run: |
+        git fetch -p
+        git checkout dev
+        git pull
+        git merge --no-ff main -m "Auto-merge main back to dev"
+        git push
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.36.0
