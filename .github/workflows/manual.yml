@@ -7,12 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Send greeting
-      run: echo "Hello world"
-
     - uses: actions/checkout@v2
       with:
         fetch-depth: '0'
+
+    - name: Merge main back to dev
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git fetch --unshallow
+        git checkout dev
+        git pull
+        git merge --no-ff master -m "Auto-merge master back to dev"
+        git push
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.36.0
