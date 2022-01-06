@@ -29,3 +29,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
+
+    - name: Create release branch
+      run: |
+        git fetch -p
+        git checkout main
+        git checkout -b $(git describe --tags) main
+        git push
