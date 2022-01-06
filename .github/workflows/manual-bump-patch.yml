@@ -25,10 +25,10 @@ jobs:
     - name: Create pull-request release to dev
       uses: repo-sync/pull-request@v2
       with:
-        source_branch: "main"                           
-        destination_branch: "dev"                      
-        pr_title: "Pulling ${{ github.ref }} into dev" 
-        pr_body: ":crown: *An automated PR*"                                           
-        pr_allow_empty: true                              
+        source_branch: ""                     
+        destination_branch: "dev"
+        pr_title: "Pulling ${{ github.ref }} into dev"
+        pr_body: ":crown: *An automated PR*"                                 
+        pr_allow_empty: true              
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
