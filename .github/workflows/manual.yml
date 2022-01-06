@@ -11,6 +11,12 @@ jobs:
       with:
         fetch-depth: '0'
 
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+
     - name: Set Git config
       run: |
           git config --local user.email "madjid.djennane@outlook.fr"
@@ -23,12 +29,6 @@ jobs:
         git pull
         git merge --no-ff main -m "Auto-merge main back to dev"
         git push
-
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.36.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: true
 
     - name: Create release branch
       run: |
