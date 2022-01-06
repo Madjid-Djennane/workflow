@@ -26,7 +26,7 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         commit-message: Update report
-        branch: $(git rev-parse --abbrev-ref HEAD)_pr
+        branch: merge-patches
         base: dev
         body: |
           Update report
