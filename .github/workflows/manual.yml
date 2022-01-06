@@ -35,4 +35,4 @@ jobs:
         git fetch -p
         git checkout main
         git checkout -b $(git describe --tags) main
-        git push
+        git push --set-upstream origin $(git describe --tags)
