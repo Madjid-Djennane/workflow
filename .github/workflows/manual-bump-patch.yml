@@ -32,7 +32,6 @@ jobs:
         echo "Updating $VERSION to $NEW_TAG"
         GIT_COMMIT=`git rev-parse HEAD`
         NEEDS_TAG=$(git describe --contains $GIT_COMMIT 2>/dev/null || echo need_tag)
-        echo "here we are"
         if [ $NEEDS_TAG == "need_tag" ]; then
           git tag $NEW_TAG
           echo "Tagged with $NEW_TAG"
