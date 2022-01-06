@@ -15,6 +15,11 @@ jobs:
       with:
         fetch-depth: '0'
 
+    - name: Set Git config
+      run: |
+          git config --local user.email "madjid.djennane@outlook.fr"
+          git config --local user.name "Madjid-Djennane"
+
     - name: Bump version and push tag
       run: |
         VERSION=`git describe --abbrev=0 --tags`
