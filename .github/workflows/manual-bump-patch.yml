@@ -22,15 +22,9 @@ jobs:
         WITH_V: true
         DEFAULT_BUMP: patch
 
-    - name: Set Git config
-      run: |
-          git config --local user.email "madjid.djennane@outlook.fr"
-          git config --local user.name "Madjid-Djennane"
-
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
       with:
-        token: ${{ secrets.PAT }}
         commit-message: Update report
         base: dev
         body: |
