@@ -21,6 +21,8 @@ jobs:
           git config --local user.name "Madjid-Djennane"
 
     - name: Bump version and push tag
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         VERSION=`git describe --abbrev=0 --tags`
         VERSION_BITS=(${VERSION//./ })
