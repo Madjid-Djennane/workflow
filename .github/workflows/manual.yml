@@ -17,22 +17,28 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
 
+    - name: Create pull-request main to dev
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: "main"                           
+        destination_branch: "dev"                      
+        pr_title: "Pulling ${{ github.ref }} into dev" 
+        pr_body: ":crown: *An automated PR*"                                           
+        pr_allow_empty: true                              
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Set Git config
       run: |
           git config --local user.email "madjid.djennane@outlook.fr"
           git config --local user.name "Madjid-Djennane"
 
-    - name: Merge main back to dev
-      run: |
-        git fetch -p
-        git checkout dev
-        git pull
-        git merge --no-ff main -m "Auto-merge main back to dev"
-        git push
-
     - name: Create release branch
       run: |
+        VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
+        MAJOR=${VERSION:1:1}
+        MINOR=${VERSION:3:1}
+        RELEASE_NAME="release_v$MAJOR.$MINOR"
         git fetch -p
         git checkout main
-        git checkout -b release_$(git describe --tags --abbrev=0) main
-        git push origin release_$(git describe --tags --abbrev=0)
+        git checkout -b $(echo $RELEASE_NAME) main
+        git push origin $(echo $RELEASE_NAME)

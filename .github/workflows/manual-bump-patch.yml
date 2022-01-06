@@ -1,4 +1,4 @@
-name: Manual workflow - bump patch
+name: Prod hot fix - bump patch
 on:
   push:
     branches:
@@ -22,15 +22,13 @@ jobs:
         WITH_V: true
         DEFAULT_BUMP: patch
 
-    - name: Set Git config
-      run: |
-          git config --local user.email "madjid.djennane@outlook.fr"
-          git config --local user.name "Madjid-Djennane"
+    - name: Create pull-request release to dev
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: "main"                           
+        destination_branch: "dev"                      
+        pr_title: "Pulling ${{ github.ref }} into dev" 
+        pr_body: ":crown: *An automated PR*"                                           
+        pr_allow_empty: true                              
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Merge release back to dev
-      run: |
-        git fetch -p
-        git checkout dev
-        git pull
-        git merge --no-ff $(git describe --tags $(git rev-list --tags --max-count=1)) -m "Auto-merge release back to dev"
-        git push
