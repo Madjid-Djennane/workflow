@@ -24,8 +24,7 @@ jobs:
 
     - name: Set changes to pull request
       run: |
-        git checkout main
-        git pull
+        git checkout -b merge-master-patches main
 
     - name: Create Pull Request back to dev
       uses: peter-evans/create-pull-request@v3
