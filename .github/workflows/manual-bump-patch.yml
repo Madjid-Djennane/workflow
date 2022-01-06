@@ -25,12 +25,13 @@ jobs:
     - name: Make changes to pull request
       run: date +%s > README.md
 
-    - name: Create Pull Request
+    - name: Create Pull Request back to dev
       uses: peter-evans/create-pull-request@v3
       with:
         commit-message: Update report
-        branch: merge-patches
+        branch: merge-release-patches
         base: dev
+        delete-branch: true
         body: |
           Update report
           - Patch dev
