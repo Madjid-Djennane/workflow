@@ -34,5 +34,5 @@ jobs:
       run: |
         git fetch -p
         git checkout main
-        git checkout -b $(git describe --tags) main
-        git push origin $(git describe --tags)
+        git checkout -b release_$(git describe --tags --abbrev=0) main
+        git push origin release_$(git describe --tags --abbrev=0)
