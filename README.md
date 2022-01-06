@@ -5,6 +5,6 @@ test bump minor tag version : good
 
 test bump patch tag version : good
 
+test merge back to dev : good
 
-test merge back to dev
-
+test create release branch
