@@ -9,3 +9,5 @@ test merge back to dev : good
 
 test create release branch : good
 
+test hot fix on release
+
