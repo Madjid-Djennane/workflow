@@ -1,6 +1,10 @@
 name: Manual workflow - bump patch
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'release_**'
+      - '!main'
+      - '!dev'
 
 jobs:
   greet:

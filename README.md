@@ -7,4 +7,5 @@ test bump patch tag version : good
 
 test merge back to dev : good
 
-test create release branch
+test create release branch : good
+
