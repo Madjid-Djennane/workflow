@@ -22,15 +22,11 @@ jobs:
           git config --local user.email "madjid.djennane@outlook.fr"
           git config --local user.name "Madjid-Djennane"
 
-    - name: Set changes to pull request
-      run: |
-        git checkout -b merge-master-patches main
-
     - name: Create Pull Request back to dev
       uses: peter-evans/create-pull-request@v3
       with:
         commit-message: PR - master to dev  
-        branch: merge-master-patches
+        branch: main
         base: dev
         delete-branch: true
         body: |
