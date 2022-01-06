@@ -38,7 +38,7 @@ jobs:
         VERSION_BITS=(${VERSION//./ })
         MAJOR=${VERSION_BITS[0]}
         MINOR=${VERSION_BITS[1]}
-        RELEASE_NAME="release_v$MAJOR.$MINOR"
+        RELEASE_NAME="release_$MAJOR.$MINOR"
         git fetch -p
         git checkout main
         git checkout -b $(echo $RELEASE_NAME) main
