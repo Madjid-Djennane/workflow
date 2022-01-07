@@ -36,7 +36,7 @@ jobs:
           fi
 
 
-    -name: Set env
+    - name: Set env
       run: echo "RELEASE_NAME=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
 
     - name: Create pull-request release to dev
