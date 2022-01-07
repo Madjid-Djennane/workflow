@@ -45,15 +45,17 @@ jobs:
         git push origin $(echo $RELEASE_NAME)
 
     - name: Set env
-      run: echo "RELEASE_NAME=$(git describe --tags  `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
+      run: echo "RELEASE=$(git describe --tags  `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ $(echo $RELEASE_NAME) }}
-        release_name: ${{ $(echo $RELEASE_NAME) }}
-        draft: false
-        prerelease: false
+    - name: Test
+      run: echo $RELEASE
+    # - name: Create Release
+    #   id: create_release
+    #   uses: actions/create-release@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     tag_name: ${{ RELEASE }}
+    #     release_name: ${{ RELEASE }}
+    #     draft: false
+    #     prerelease: false
