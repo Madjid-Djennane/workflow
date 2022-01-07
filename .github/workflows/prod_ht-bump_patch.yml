@@ -16,24 +16,24 @@ jobs:
         fetch-depth: '0'
 
     - name: Bump version and push tag
-        run: |
-          VERSION=`git describe --abbrev=0 --tags`
-          VERSION_BITS=(${VERSION//./ })
-          MAJOR=${VERSION_BITS[0]}
-          MINOR=${VERSION_BITS[1]}
-          PATCH=${VERSION_BITS[2]}
-          PATCH=$((PATCH+1))
-          NEW_TAG="$MAJOR.$MINOR.$PATCH"
-          echo "Updating $VERSION to $NEW_TAG"
-          GIT_COMMIT=`git rev-parse HEAD`
-          NEEDS_TAG=$(git describe --contains $GIT_COMMIT 2>/dev/null || echo need_tag)
-          if [ $NEEDS_TAG == "need_tag" ]; then
-            git tag $NEW_TAG
-            echo "Tagged with $NEW_TAG"
-            git push --tags
-          else
-            echo "Already a tag on this commit"
-          fi
+      run: |
+        VERSION=`git describe --abbrev=0 --tags`
+        VERSION_BITS=(${VERSION//./ })
+        MAJOR=${VERSION_BITS[0]}
+        MINOR=${VERSION_BITS[1]}
+        PATCH=${VERSION_BITS[2]}
+        PATCH=$((PATCH+1))
+        NEW_TAG="$MAJOR.$MINOR.$PATCH"
+        echo "Updating $VERSION to $NEW_TAG"
+        GIT_COMMIT=`git rev-parse HEAD`
+        NEEDS_TAG=$(git describe --contains $GIT_COMMIT 2>/dev/null || echo need_tag)
+        if [ $NEEDS_TAG == "need_tag" ]; then
+          git tag $NEW_TAG
+          echo "Tagged with $NEW_TAG"
+          git push --tags
+        else
+          echo "Already a tag on this commit"
+        fi
 
 
     - name: Set env
