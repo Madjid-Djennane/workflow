@@ -43,3 +43,14 @@ jobs:
         git checkout main
         git checkout -b $(echo $RELEASE_NAME) main
         git push origin $(echo $RELEASE_NAME)
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: tag
+        release_name: Release
+        draft: false
+        prerelease: false
