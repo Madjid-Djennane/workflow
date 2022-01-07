@@ -1,4 +1,4 @@
-name: Manual workflow - bump minor
+name: Deploy staging - bump minor
 on:
   workflow_dispatch:
 
@@ -44,16 +44,3 @@ jobs:
         git checkout -b $(echo $RELEASE_NAME) main
         git push origin $(echo $RELEASE_NAME)
 
-    - name: Set env
-      run: echo "release=$(git describe --tags  `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
-    
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ env.release }}
-        release_name: "Release ${{ env.release }}"
-        draft: false
-        prerelease: false
