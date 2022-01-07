@@ -5,3 +5,7 @@ const sum = (a, b) => {
 const nothing = () => {
     return
 }
+
+const hello_world = () => {
+    console.log('hello world') 
+}
