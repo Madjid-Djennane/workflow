@@ -1,4 +1,4 @@
-name: Prod hot fix - bump patch
+name: Deploy hot fix to staging
 on:
   push:
     branches:

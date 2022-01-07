@@ -1,4 +1,4 @@
-name: Deploy to prod - draft release
+name: Deploy to prod
 on:
   workflow_dispatch:
 
