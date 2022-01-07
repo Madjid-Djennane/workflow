@@ -45,7 +45,7 @@ jobs:
         git push origin $(echo $RELEASE_NAME)
 
     - name: Set env
-      run: echo "RELEASE_NAME=$(git describe --tags  `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV1
+      run: echo "RELEASE_NAME=$(git describe --tags  `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
 
     - name: Create Release
       id: create_release
