@@ -35,10 +35,25 @@ jobs:
     - name: Create release branch
       run: |
         VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
-        MAJOR=${VERSION:1:1}
-        MINOR=${VERSION:3:1}
-        RELEASE_NAME="release_v$MAJOR.$MINOR"
+        VERSION_BITS=(${VERSION//./ })
+        MAJOR=${VERSION_BITS[0]}
+        MINOR=${VERSION_BITS[1]}
+        RELEASE_NAME="release_$MAJOR.$MINOR"
         git fetch -p
         git checkout main
         git checkout -b $(echo $RELEASE_NAME) main
         git push origin $(echo $RELEASE_NAME)
+
+    - name: Set env
+      run: echo "release=$(git describe --tags  `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.release }}
+        release_name: "Release ${{ env.release }}"
+        draft: false
+        prerelease: false
