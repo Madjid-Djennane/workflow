@@ -49,12 +49,12 @@ jobs:
     - name: Set env
       run: echo "release=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
 
-    - name: Create pull-request release to dev
+    - name: Create pull-request release to main
       uses: repo-sync/pull-request@v2
       with:
         source_branch: ""                     
-        destination_branch: "dev"
-        pr_title: "Pulling ${{ env.release }} into dev"
+        destination_branch: "main"
+        pr_title: "Pulling ${{ env.release }} into main"
         pr_body: ":crown: *An automated PR*"                                 
         pr_allow_empty: true              
         github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -9,3 +9,7 @@ const nothing = () => {
 const hello_world = () => {
     console.log('hello world') 
 }
+
+const release_function = () => {
+    console.log('test deploy hot fix to staging workflow')
+}
