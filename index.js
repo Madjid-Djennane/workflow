@@ -13,3 +13,7 @@ const hello_world = () => {
 const release_function = () => {
     console.log('test deploy hot fix to staging workflow')
 }
+
+const new_function = () => {
+    return 'yeah!'
+}
