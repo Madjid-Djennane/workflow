@@ -7,20 +7,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
       with:
         fetch-depth: '0'
+
+    - name: Set Git config
+      run: |
+          git config --local user.email "madjid.djennane@outlook.fr"
+          git config --local user.name "Madjid-Djennane"
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.36.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
-
-    - name: Set Git config
-      run: |
-          git config --local user.email "madjid.djennane@outlook.fr"
-          git config --local user.name "Madjid-Djennane"
 
     - name: Create release branch
       run: |
