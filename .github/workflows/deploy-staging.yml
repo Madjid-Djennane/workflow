@@ -32,7 +32,7 @@ jobs:
         git push origin $(echo $RELEASE_NAME)
 
 
-    - name: Set previous & current release branches names in github env
+    - name: Set second last & current release branches names in github env
       run: |
         git fetch -p
         branches_list_str=$(git branch -r --list --sort=committerdate "*release_v*")
@@ -45,7 +45,7 @@ jobs:
         previous_release_name=(${previous_release//\// })
         echo "previous=${previous_release_name[-1]}" >> $GITHUB_ENV
 
-    - name: Create pull-request release to main
+    - name: Create pull-request second release to current release
       uses: repo-sync/pull-request@v2
       with:
         source_branch: "${{ env.previous }}"
