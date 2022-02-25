@@ -37,6 +37,7 @@ jobs:
         git fetch -p
         branches_list_str=$(git branch -r --list "*release_v*")
         branches_list_str=$(echo $branches_list_str | xargs -n1 | sort | xargs)
+        echo "branches list >>" $branches_list_str
         branches_list=(${branches_list_str//\ / })
         current_release=${branches_list[-1]}
         current_release_name=(${current_release//\// })
