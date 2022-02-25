@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - main
+
+name: Deploy to aws lambda - dev
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+
+    - name: deploy to dev
+      run: echo "deploy to dev !"

@@ -1,0 +1,8 @@
+-> enlever les deploy auto sur staging
+-> bump minor on first deploy to prod & bump patch on hot fix deploy to prod
+-> manual deploy to staging
+
+-> merge release_v0.1 to release_v0.2
+
+// quand on merge dans une branche de release_v(n), on créer deux PR l'une vers master et l'autre vers la release_v(n+1) si elle existe !
+
