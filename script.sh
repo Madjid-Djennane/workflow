@@ -12,6 +12,8 @@ current_release=${branches_list[-1]}
 current_release_name=(${current_release//\// })
 echo "current release name >> " ${current_release_name[-1]}
 
+echo 
+
 previous_release=${branches_list[-2]}
 previous_release_name=(${previous_release//\// })
 echo "previous release >> " ${previous_release_name[-1]}
