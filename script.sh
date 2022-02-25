@@ -2,8 +2,8 @@
 
 git fetch -p
 
-branches_list_str=$(git branch -r --list "*release_v*")
-branches_list_str=$(echo $branches_list_str | xargs -n1 | sort | xargs)
+branches_list_str=$(git branch -r --list --sort=committerdate "*release_v*")
+#branches_list_str=$(echo $branches_list_str | xargs -n1 | sort | xargs)
 
 branches_list=(${branches_list_str//\ / })
 echo "release branches >> " $branches_list_str
