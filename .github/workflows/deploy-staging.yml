@@ -47,8 +47,8 @@ jobs:
     - name: Create pull-request release to main
       uses: repo-sync/pull-request@v2
       with:
-        source_branch: ${{ env.previous }}
-        destination_branch: ${{ env.current }}
+        source_branch: "${{ env.previous }}"
+        destination_branch: "${{ env.current }}"
         pr_title: "Pulling ${{ env.previous }} into ${{ env.current }}"
         pr_body: ":crown: *An automated PR*"
         pr_allow_empty: true
