@@ -1,0 +1,26 @@
+name: deploy hotfix
+on:
+  push:
+    branches:
+      - 'release_**'
+      - '!main'
+      - '!dev'
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+
+    - name: Create pull-request release branch to main
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: ""
+        destination_branch: "main"
+        pr_title: "Pulling ${{ github.ref }} into main"
+        pr_body: ":crown: *An automated PR*"
+        pr_allow_empty: true              
+        github_token: ${{ secrets.GITHUB_TOKEN }}
