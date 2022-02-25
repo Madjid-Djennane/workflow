@@ -12,11 +12,11 @@ jobs:
         fetch-depth: '0'
         token: ${{ github.token }}
 
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.36.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: true
+    # - name: Bump version and push tag
+    #   uses: anothrNick/github-tag-action@1.36.0
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     WITH_V: true
 
     - name: Create release branch
       run: |
@@ -30,3 +30,26 @@ jobs:
         git checkout -b $(echo $RELEASE_NAME) main
         git push origin $(echo $RELEASE_NAME)
 
+
+    - name: Set previous & current release branches names in github env
+      run: |
+        git fetch -p
+        branches_list_str=$(git branch -r --list "*release_v*")
+        branches_list_str=$(echo $branches_list_str | xargs -n1 | sort | xargs)
+        branches_list=(${branches_list_str//\ / })
+        current_release=${branches_list[-1]}
+        current_release_name=(${current_release//\// })
+        run echo "current=${current_release_name[-1]}" >> $GITHUB_ENV
+        previous_release=${branches_list[-2]}
+        previous_release_name=(${previous_release//\// })
+        run echo "previous=${current_release_name[-1]}" >> $GITHUB_ENV
+
+    - name: Create pull-request release to main
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: ${{ env.previous }}
+        destination_branch: ${{ env.current }}
+        pr_title: "Pulling ${{ env.previous }} into ${{ env.current }}"
+        pr_body: ":crown: *An automated PR*"
+        pr_allow_empty: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
