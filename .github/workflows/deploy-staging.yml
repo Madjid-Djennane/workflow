@@ -20,12 +20,12 @@ jobs:
 
     - name: Create release branch
       run: |
+        git fetch -p
         VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
         VERSION_BITS=(${VERSION//./ })
         MAJOR=${VERSION_BITS[0]}
         MINOR=${VERSION_BITS[1]}
         RELEASE_NAME="release_$MAJOR.$MINOR"
-        git fetch -p
         git checkout main
         echo "current release >>" $RELEASE_NAME
         git checkout -b $(echo $RELEASE_NAME) main
