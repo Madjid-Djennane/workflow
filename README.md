@@ -12,3 +12,5 @@ branches script : v
 release PR test
 
 main up
+
+test global
