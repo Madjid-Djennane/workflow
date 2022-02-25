@@ -39,10 +39,10 @@ jobs:
         branches_list=(${branches_list_str//\ / })
         current_release=${branches_list[-1]}
         current_release_name=(${current_release//\// })
-        run echo "current=${current_release_name[-1]}" >> $GITHUB_ENV
+        echo "current=${current_release_name[-1]}" >> $GITHUB_ENV
         previous_release=${branches_list[-2]}
         previous_release_name=(${previous_release//\// })
-        run echo "previous=${current_release_name[-1]}" >> $GITHUB_ENV
+        echo "previous=${current_release_name[-1]}" >> $GITHUB_ENV
 
     - name: Create pull-request release to main
       uses: repo-sync/pull-request@v2
