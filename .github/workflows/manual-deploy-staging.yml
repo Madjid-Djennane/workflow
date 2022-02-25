@@ -1,4 +1,4 @@
-name: Deploy to staging
+name: Manual deploy to staging
 on:
   workflow_dispatch:
 
@@ -11,12 +11,6 @@ jobs:
       with:
         fetch-depth: '0'
         token: ${{ github.token }}
-
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.36.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: true
 
     - name: Create release branch
       run: |
