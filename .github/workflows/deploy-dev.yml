@@ -1,10 +1,9 @@
-name: Deploy to dev
 on:
   push:
     branches:
       - main
 
-name: Deploy to aws lambda - dev
+name: Deploy dev
 
 jobs:
   greet:
