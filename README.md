@@ -12,3 +12,5 @@ branches script : v
 release PR test
 
 main up
+
+v12.0 up
