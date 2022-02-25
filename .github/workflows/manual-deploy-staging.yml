@@ -29,17 +29,24 @@ jobs:
     - name: Set second last & current release branches names in github env
       run: |
         git fetch -p
+        # release branches list sorted 
         branches_list_str=$(git branch -r --list --sort=committerdate "*release_v*")
         echo "branches list >>" $branches_list_str
-        branches_list=(${branches_list_str//\ / })
-        current_release=${branches_list[-1]}
-        current_release_name=(${current_release//\// })
-        echo "current=${current_release_name[-1]}" >> $GITHUB_ENV
-        previous_release=${branches_list[-2]}
-        previous_release_name=(${previous_release//\// })
-        echo "previous=${previous_release_name[-1]}" >> $GITHUB_ENV
+        branches_list_size=${#branches_list_str}
+        if [ $branches_list_size -gt 0 ]
+        then
+          branches_list=(${branches_list_str//\ / })
+          current_release=${branches_list[-1]}
+          current_release_name=(${current_release//\// })
+          echo "current=${current_release_name[-1]}" >> $GITHUB_ENV
+          previous_release=${branches_list[-2]}
+          previous_release_name=(${previous_release//\// })
+          echo "previous=${previous_release_name[-1]}" >> $GITHUB_ENV
+        else
+          echo "" >> $GITHUB_ENV
 
     - name: Create pull-request second release to current release
+      if: ${{ env.previous }}
       uses: repo-sync/pull-request@v2
       with:
         source_branch: "${{ env.previous }}"
