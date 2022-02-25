@@ -27,6 +27,7 @@ jobs:
         RELEASE_NAME="release_$MAJOR.$MINOR"
         git fetch -p
         git checkout main
+        echo "current release >>" $RELEASE_NAME
         git checkout -b $(echo $RELEASE_NAME) main
         git push origin $(echo $RELEASE_NAME)
 
