@@ -44,7 +44,7 @@ jobs:
         echo "current=${current_release_name[-1]}" >> $GITHUB_ENV
         previous_release=${branches_list[-2]}
         previous_release_name=(${previous_release//\// })
-        echo "previous=${current_release_name[-1]}" >> $GITHUB_ENV
+        echo "previous=${previous_release_name[-1]}" >> $GITHUB_ENV
 
     - name: Create pull-request release to main
       uses: repo-sync/pull-request@v2
