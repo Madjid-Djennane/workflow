@@ -41,14 +41,14 @@ jobs:
           previous_release=${branches_list[-2]}
           previous_release_name=(${previous_release//\// })
           echo "previous=${previous_release_name[-1]}" >> $GITHUB_ENV
-          echo "draft_release='1'" >> $GITHUB_ENV
+          echo "draft_release=1" >> $GITHUB_ENV
           echo "draft release value if 1 >>" $draft_release
         else
-          echo "draft_release='0'" >> $GITHUB_ENV
+          echo "draft_release=0" >> $GITHUB_ENV
           echo "draft release value if 0 >>" $draft_release
         fi
       
-    - if: ${{ env.draft_release == '1' }}
+    - if: ${{ env.draft_release == 1 }}
       name: Create pull-request second release to current release
       uses: repo-sync/pull-request@v2
       with:
