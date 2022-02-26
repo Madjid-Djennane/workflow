@@ -46,8 +46,8 @@ jobs:
           echo "draft_release='0'" >> $GITHUB_ENV
         fi
       
-    - name: Create pull-request second release to current release
-      if: ${{ env.draft_release == '1' }}
+    - if: ${{ env.draft_release == '1' }}
+      name: Create pull-request second release to current release
       uses: repo-sync/pull-request@v2
       with:
         source_branch: "${{ env.previous }}"
