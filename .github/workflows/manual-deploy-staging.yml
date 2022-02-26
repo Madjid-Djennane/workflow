@@ -30,7 +30,7 @@ jobs:
       run: |
         git fetch -p
         # release branches list sorted 
-        branches_list_str=$(git branch -r --list --sort=committerdate "*release_v*")
+        branches_list_str=$(git branch -r --list --sort=refname "*release_v*")
         echo "branches list >>" $branches_list_str
         branches_list=(${branches_list_str//\ / })
         if [ ${#branches_list[@]} -gt 1 ]
