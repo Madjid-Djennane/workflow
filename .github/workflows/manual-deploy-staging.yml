@@ -41,9 +41,9 @@ jobs:
           previous_release=${branches_list[-2]}
           previous_release_name=(${previous_release//\// })
           echo "previous=${previous_release_name[-1]}" >> $GITHUB_ENV
-          echo "draft_release=1" >> $GITHUB_ENV
+          echo "draft_release='1'" >> $GITHUB_ENV
         else
-          echo "draft_release=0" >> $GITHUB_ENV
+          echo "draft_release='0'" >> $GITHUB_ENV
         fi
       
     - name: Create pull-request second release to current release
