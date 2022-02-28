@@ -1,3 +1,8 @@
+/**
+ * Returns sum of params
+ * @param {number} a 
+ * @param {number} b  
+ */
 const sum = (a, b) => {
     return a + b
 }
