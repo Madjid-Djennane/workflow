@@ -30,11 +30,11 @@ jobs:
       run: |
         git fetch -p
         # release branches list sorted 
-        branches_list_str=$(git branch -r --list --sort=committerdate "*release_v*")
+        branches_list_str=$(git branch -r --list --sort=refname "*release_v*")
         echo "branches list >>" $branches_list_str
-        if [ ${#branches_list[@]} -gt 0 ]
+        branches_list=(${branches_list_str//\ / })
+        if [ ${#branches_list[@]} -gt 1 ]
         then
-          branches_list=(${branches_list_str//\ / })
           current_release=${branches_list[-1]}
           current_release_name=(${current_release//\// })
           echo "current=${current_release_name[-1]}" >> $GITHUB_ENV
@@ -42,12 +42,14 @@ jobs:
           previous_release_name=(${previous_release//\// })
           echo "previous=${previous_release_name[-1]}" >> $GITHUB_ENV
           echo "draft_release=1" >> $GITHUB_ENV
+          echo "draft release value if 1 >>" $draft_release
         else
           echo "draft_release=0" >> $GITHUB_ENV
+          echo "draft release value if 0 >>" $draft_release
         fi
-
-    - name: Create pull-request second release to current release
-      if: ${{ env.draft_release == 1 }}
+      
+    - if: ${{ env.draft_release == 1 }}
+      name: Create pull-request second release to current release
       uses: repo-sync/pull-request@v2
       with:
         source_branch: "${{ env.previous }}"

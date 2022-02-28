@@ -2,13 +2,12 @@
 
 git fetch -p
 
-branches_list_str=$(git branch -r --list --sort=committerdate "*release_v*")
+branches_list_str=$(git branch -r --list --sort=refname "*release_v*")
 
 branches_list=(${branches_list_str//\ / })
 
 if [ ${#branches_list[@]} -gt 1 ]
 then
-    current release
     current_release=${branches_list[-1]}
     current_release_name=(${current_release//\// })
     echo "current release name >> " ${current_release_name[-1]}
