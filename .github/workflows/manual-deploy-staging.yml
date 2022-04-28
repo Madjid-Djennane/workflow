@@ -36,7 +36,7 @@ jobs:
       run: |
         git fetch -p
         # release branches list sorted 
-        branches_list_str=$(git branch -r --list --sort=refname "*release_v*")
+        branches_list_str=$(git branch -r --list "*release_v*" | tr " " "\n" | sort -t . -k 2 -g | tr "\n" " ")
         echo "branches list >>" $branches_list_str
         branches_list=(${branches_list_str//\ / })
         if [ ${#branches_list[@]} -gt 1 ]
@@ -48,10 +48,8 @@ jobs:
           previous_release_name=(${previous_release//\// })
           echo "previous=${previous_release_name[-1]}" >> $GITHUB_ENV
           echo "draft_release=1" >> $GITHUB_ENV
-          echo "draft release value if 1 >>" $draft_release
         else
           echo "draft_release=0" >> $GITHUB_ENV
-          echo "draft release value if 0 >>" $draft_release
         fi
       
     - if: ${{ env.draft_release == 1 }}
