@@ -2,7 +2,9 @@
 
 git fetch -p
 
-branches_list_str=$(git branch -r --list --sort=refname "*release_v*")
+branches_list_str=$(git branch -r --list "*release_v*" | tr " " "\n" | sort -t . -k 2 -g | tr "\n" " ")
+
+## echo "81 4 6 12 3 0" | tr " " "\n" | sort -g | tr "\n" " "
 
 branches_list=(${branches_list_str//\ / })
 
